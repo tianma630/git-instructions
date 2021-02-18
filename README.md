@@ -1,20 +1,30 @@
 # Git instructions
 
+> 原文：https://gitee.com/progit
+
+- `git hash-object -w <file>` &emsp; 将文件转为hash存储到仓库中
+- `git cat-file -p <hash>` &emsp; 获取hash内容
+- `git ls-files -s` &emsp; 现实暂存区中的内容
+
 ## diff
 
 - `git diff` &emsp; 查看修改的内容
 - `git diff --staged` &emsp; 查看提交暂存区的内容
 
-## commit & restore
+## commit
 
 - `git commit -a -m '<comment>'` &emsp; 跳过git add，直接commit
 - `git restore <file>` &emsp; 撤销修改的内容
 - `git checkout -- <file>` &emsp; 撤销修改的内容(同上)
 - `git restore --staged <file>` &emsp; 撤销提交到暂存区的文件
 - `git reset HEAD <file>` &emsp; 撤销提交到暂存区的文件(同上)
-- `git commit --amend` &emsp; 修改最后一次提交，或和当前暂存区的内容合并一起提交
+- `git rm --cached <file>` &emsp; 撤销提交到暂存区的新增文件
+- `git commit --amend -m` &emsp; 修改最后一次提交，或和当前暂存区的内容合并一起提交
+- `git reset --soft HEAD~[n:1 2 3]` &emsp; 撤回最近n次的commit(撤销commit，不撤销git add)
+- `git reset --mixed HEAD~[n:1 2 3]` &emsp; 撤回最近n次的commit(撤销commit，撤销git add)
+- `git reset --hard HEAD~[n:1 2 3]` &emsp; 撤回最近n次的commit(撤销commit，撤销git add，还原改动的代码)
 
-### log
+## log
 
 - `git log -p -2` &emsp; 查看最近的2次commit，及修改内容
   
@@ -58,6 +68,8 @@
   - --until, --before 仅显示指定时间之前的提交。
   - --committer 仅显示指定提交者相关的提交。 
 
+- `git reflog` &emsp; 查看完整操作历史
+
 ## tag
 
 - `git tag` &emsp; 显示所有标签
@@ -65,5 +77,32 @@
 - `git tag -a v1.4 -m 'my version 1.4'` &emsp; 含附注的标签
 - `git show v1.4` &emsp; 显示标签详情
 - `git tag v1.4-lw` &emsp; 轻量级标签
+- `git tag -d [tagName]` 删除标签
 - `git push origin v1.5` &emsp; 推送标签到远程仓库
 - `git push origin --tags` &emsp; 推送本地所有标签到远程仓库
+
+## branch
+
+- `git branch` 查看分支
+- `git checkout [branchName]` 切换分支`
+- `git branch -b [branchName]` 创建并切换分支
+- `git branch [branchName] [commitHash]` 特定提交历史创建分支
+- `git branch -v` 查看所有分支的最后一次提交
+- `git branch --merged` 查看哪些分支已被并入当前分支
+- `git branch --no-merged` 查看哪些分支未被并入当前分支
+
+## stash
+
+- `git stash`
+- `git stash pop`
+- `git stash list`
+- `git stash apply [stashId]`
+- `git stash drop [stashId]`
+- `git stash pop`
+
+## rebase
+
+- `git rebase [branchName]` &emsp; 合并主分支的更新，不生成新的commit
+- `git rebase --continue` &emsp; 解决冲突后，继续rebase
+- `git rebase --abort` &emsp; 取消当前的rebase
+- `git rebase -i HEAD~n` &emsp; 对最近的 n 个 commit 进行 rebase 操作(合并)
