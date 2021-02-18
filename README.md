@@ -2,6 +2,8 @@
 
 > 原文：https://gitee.com/progit
 
+## hash
+
 - `git hash-object -w <file>` &emsp; 将文件转为hash存储到仓库中
 - `git cat-file -p <hash>` &emsp; 获取hash内容
 - `git ls-files -s` &emsp; 现实暂存区中的内容
@@ -11,7 +13,7 @@
 - `git diff` &emsp; 查看修改的内容
 - `git diff --staged` &emsp; 查看提交暂存区的内容
 
-## commit
+## commit & restore
 
 - `git commit -a -m '<comment>'` &emsp; 跳过git add，直接commit
 - `git restore <file>` &emsp; 撤销修改的内容
@@ -83,13 +85,13 @@
 
 ## branch
 
-- `git branch` 查看分支
-- `git checkout [branchName]` 切换分支`
-- `git branch -b [branchName]` 创建并切换分支
-- `git branch [branchName] [commitHash]` 特定提交历史创建分支
-- `git branch -v` 查看所有分支的最后一次提交
-- `git branch --merged` 查看哪些分支已被并入当前分支
-- `git branch --no-merged` 查看哪些分支未被并入当前分支
+- `git branch` &emsp; 查看分支
+- `git checkout [branchName]` &emsp; 切换分支`
+- `git branch -b [branchName]` &emsp; 创建并切换分支
+- `git branch [branchName] [commitHash]` &emsp; 特定提交历史创建分支
+- `git branch -v` &emsp; 查看所有分支的最后一次提交
+- `git branch --merged` &emsp; 查看哪些分支已被并入当前分支
+- `git branch --no-merged` &emsp; 查看哪些分支未被并入当前分支
 
 ## stash
 
