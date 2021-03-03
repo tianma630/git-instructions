@@ -13,7 +13,7 @@
 - `git diff` &emsp; 查看修改的内容
 - `git diff --staged` &emsp; 查看提交暂存区的内容
 
-## commit & restore
+## commit
 
 - `git commit -a -m '<comment>'` &emsp; 跳过git add，直接commit
 - `git restore <file>` &emsp; 撤销修改的内容
@@ -25,6 +25,7 @@
 - `git reset --soft HEAD~[n:1 2 3]` &emsp; 撤回最近n次的commit(撤销commit，不撤销git add)
 - `git reset --mixed HEAD~[n:1 2 3]` &emsp; 撤回最近n次的commit(撤销commit，撤销git add)
 - `git reset --hard HEAD~[n:1 2 3]` &emsp; 撤回最近n次的commit(撤销commit，撤销git add，还原改动的代码)
+- `git show [hash]` &emsp; 查看变更详情
 
 ## log
 
@@ -95,12 +96,11 @@
 
 ## stash
 
-- `git stash`
-- `git stash pop`
-- `git stash list`
-- `git stash apply [stashId]`
-- `git stash drop [stashId]`
-- `git stash pop`
+- `git stash` &emsp; 暂存工作区和缓存区的变更
+- `git stash pop` &emsp; 还原暂存的内容
+- `git stash list` &emsp; 查看暂存记录
+- `git stash apply [stashId]` &emsp; 取出特定的暂存的内容
+- `git stash drop [stashId]` &emsp; 删除特定的暂存的内容
 
 ## rebase
 
@@ -108,3 +108,28 @@
 - `git rebase --continue` &emsp; 解决冲突后，继续rebase
 - `git rebase --abort` &emsp; 取消当前的rebase
 - `git rebase -i HEAD~n` &emsp; 对最近的 n 个 commit 进行 rebase 操作(合并)
+
+## 调试
+
+- `git blame -L 12,22 [file]` &emsp; 展示文件中第12到22行最近一次变更
+- `git bisect` &emsp; 二分查找问题
+  1. `git bisect start`
+  1. `git bisect bad`
+  1. `git bisect good v1.0`
+  1. `git bisect reset`
+
+## submodule
+
+https://gitee.com/progit/6-Git-%E5%B7%A5%E5%85%B7.html#6.6-%E5%AD%90%E6%A8%A1%E5%9D%97
+
+## 钩子(.git/hooks)
+
+- pre-commit：在键入提交信息前运行, 被用来检查即将提交的快照，比如lint
+- prepare-commit-msg：在提交信息编辑器显示之前，默认信息被创建之后运行
+- commit-msg：用来在提交通过前验证项目状态或提交信息
+- post-commit：在整个提交过程完成后运行，他不会接收任何参数，但可以运行git log -1 HEAD来获得最后的提交信息。总之，该挂钩是作为通知之类使用的。
+- applypatch-msg
+- pre-rebase
+- post-checkout
+- pre-receive
+- post-receive
